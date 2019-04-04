@@ -8,9 +8,18 @@
     <link rel="stylesheet" href="./css/master.css">
 
     <!-- JS -->
+    <script src="./js/form.js"></script>
     <title>Decider for Indecisive People</title>
   </head>
   <body>
     <h1>We do the deciding for you</h1>
+
+    <form name="items" id='itemform'>
+      Enter item names:<br>
+      <input type="text" class='item' name='i1'><br>
+      <input type="text" class='item' name='i2'>
+      <input type="button" id='addBtn' onclick="addField()" value="Add"><br>
+      <!-- <input type="button" onclick="readFields()" value="Read"> -->
+    </form>
   </body>
 </html>
