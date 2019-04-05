@@ -4,24 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Decider for Indecisive People</title>
+
     <!-- CSS -->
     <link rel="stylesheet" href="./css/master.css">
 
     <!-- JS -->
+    <!-- Libraries -->
+    <script src='./js/libs/utilities.js'></script>
+
+    <!-- Scripts -->
     <script src="./js/form.js"></script>
-    <title>Decider for Indecisive People</title>
   </head>
   <body>
     <h1>We do the deciding for you</h1>
 
-    <form name="itemform" id='itemform'>
+    <form name="itemform" id='itemform' onsubmit="return findResult()">
       <input type="text" class='item' id='i1' autofocus>
       <input type='button' id='db1' class='delBtn' value='X' onclick="delField(this)" tabindex="-1"><br>
 
       <input type="text" class='item' id='i2'>
       <input type='button' id='db2' class='delBtn' value='X' onclick="delField(this)" tabindex="-1"><br>
 
-      <input type="button" id='addBtn' onclick="addField()" value="Add">
+      <input type="button" id='addBtn' onclick="addField()" value="Add"><input type="submit" id='submit' value="Find Answer">
     </form>
+    <div id='resultContainer'>
+    </div>
   </body>
 </html>
