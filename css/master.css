@@ -1,10 +1,24 @@
 body {
   background-color: #9a9a9a;
+  font-style: "Times New Roman";
 }
 h1, h2 {
   text-align: center;
 }
 
 form {
+  font-style: "Times New Roman";
   text-align: center;
+}
+
+input[type='button'] {
+  background-color: #1ed735;
+  border: none;
+  margin: 10px;
+  padding: 16px;
+  cursor: pointer;
+}
+
+input[type='button']:hover {
+  background-color: #16ac29;
 }

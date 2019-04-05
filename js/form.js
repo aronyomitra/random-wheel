@@ -11,10 +11,9 @@ function addField()
   let br = document.createElement("br");
 
   let addBtn = document.getElementById('addBtn');
-  document.getElementById('itemform').removeChild(addBtn);
   document.getElementById('itemform').appendChild(newfield);
-  document.getElementById('itemform').appendChild(addBtn);
   document.getElementById('itemform').appendChild(br);
+  document.getElementById('itemform').appendChild(addBtn);
 }
 
 function readFields()
