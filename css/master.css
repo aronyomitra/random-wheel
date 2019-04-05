@@ -32,8 +32,9 @@ input.delBtn {
 input.delBtn:hover {
   background-color: #dee2de;
 }
+
 input.item {
-  margin-right: 3px;
+  margin-right: 5px;
   padding: 5px;
 }
 
