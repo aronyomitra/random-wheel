@@ -14,10 +14,14 @@
   <body>
     <h1>We do the deciding for you</h1>
 
-    <form name="items" id='itemform'>
+    <form name="itemform" id='itemform'>
       <strong>Enter items:</strong><br>
-      <input type="text" class='item' name='i1'><br>
-      <input type="text" class='item' name='i2'><br>
+      <input type="text" class='item' id='i1'>
+      <input type='button' id='db1' class='delBtn' value='X' onclick="delField(this)"><br>
+
+      <input type="text" class='item' id='i2'>
+      <input type='button' id='db2' class='delBtn' value='X' onclick="delField(this)"><br>
+
       <input type="button" id='addBtn' onclick="addField()" value="Add">
       <!-- <input type="button" onclick="readFields()" value="Read"> -->
     </form>

@@ -11,7 +11,7 @@ form {
   text-align: center;
 }
 
-input[type='button'] {
+#addBtn {
   background-color: #1ed735;
   border: none;
   margin: 10px;
@@ -19,6 +19,24 @@ input[type='button'] {
   cursor: pointer;
 }
 
-input[type='button']:hover {
+#addBtn:hover {
   background-color: #16ac29;
+}
+
+input.delBtn {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+input.delBtn:hover {
+  background-color: #dee2de;
+}
+input.item {
+  margin-right: 3px;
+  padding: 5px;
+}
+
+input:focus {
+  outline: none;
 }
