@@ -53,3 +53,9 @@ input.item {
 input:focus {
   outline: none;
 }
+
+#sketch {
+  /* display: none; */
+  text-align: center;
+  margin: 10px;
+}
