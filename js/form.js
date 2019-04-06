@@ -1,3 +1,9 @@
+/*  No two input fields or buttons can have the same id
+    Once an id has been added (or deleted) no other element can have the same ID again.
+    Hence it is required to track the highest id so far with the variable:
+*/
+var highestInputId = 2;
+
 function addField()
 {
   /*  Browsers automatically add a whitespace between two inline elements
@@ -11,12 +17,12 @@ function addField()
 
   // The first input field is the base from which additional ones are copied
   let newfield = document.getElementById('i1').cloneNode(true);
-  itemCount++;
-  newfield.id = 'i' + itemCount;
+  highestInputId++;
+  newfield.id = 'i' + highestInputId;
   newfield.value = '';
 
   let db = document.getElementById('db1').cloneNode(true);
-  db.id = 'db' + itemCount;
+  db.id = 'db' + highestInputId;
 
   let br = document.createElement("br");
   let sp = document.createElement("span");
@@ -33,7 +39,7 @@ function addField()
   newfield.focus();
 }
 
-// The element is passed as an arg
+// The button element is passed as an arg
 function delField(el)
 {
   let itemCount = document.getElementsByClassName('item').length;
