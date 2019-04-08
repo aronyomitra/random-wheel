@@ -58,3 +58,11 @@ input:focus {
   text-align: center;
   margin: 10px;
 }
+
+p.outro {
+  display: none;
+  text-align: center;
+  color: blue;
+  font-weight: bold;
+  font-size: 20px;
+}

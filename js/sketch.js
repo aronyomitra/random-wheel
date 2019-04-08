@@ -200,4 +200,5 @@ function endMessage()
   textSize(30);
   textAlign(CENTER, CENTER);
   text (items[arrow.itemRef], canvas_size[0]/2, canvas_size[1]/2);
+  document.getElementsByClassName('outro')[0].style.display = 'block';
 }
