@@ -9,6 +9,9 @@ let tListStart;
 
 let items = [];
 
+// Object to encapsulate the arrow pointer
+// The length of the arrow is given an initial value
+// but it will be scaled later based on the text size
 let arrow = {
   head: new Array(2),
   len: 200,
@@ -41,6 +44,7 @@ function draw()
   arrow.draw();
 }
 
+// Called every time the user presses the submit button in form
 function resetSketch()
 {
   sketchStartTime = millis();
@@ -76,7 +80,7 @@ function scaleTextSize(ts)
   // Make the text the biggest possible but make sure everything fits inside the canvas
   textSize(ts);
 
-  // Horizontally we have to leave 25% of the space for the arrow
+  // Horizontally we have to leave minimum 25% of the space for the arrow
   if (tListStart[1] + items.length*ts > canvas_size[1] || tListStart[0] + getMaxWidth(items) > 0.75*canvas_size[0])
   {
     return scaleTextSize(ts-1)
@@ -87,6 +91,7 @@ function scaleTextSize(ts)
   }
 }
 
+// The 'fins' of the arrow have to be within the particular text line
 function scaleArrowSize(as)
 {
   if (2*as/10 > tSize)
