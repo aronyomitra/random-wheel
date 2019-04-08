@@ -1,8 +1,11 @@
 let canvas;
 let canvas_size = [1000, 350];
 
+// Variables to control timing events
 let sketchRunning = false;
 let sketchStartTime;
+let waitInterval;
+let lastArrowUpdateTime;
 
 let tSize;
 let tListStart;
@@ -16,12 +19,29 @@ let arrow = {
   head: new Array(2),
   len: 200,
 
+  // Current item pointing to (index)
+  itemRef: 0,
+
   draw: function()
   {
     stroke (255);
     line (arrow.head[0], arrow.head[1], arrow.head[0] + arrow.len, arrow.head[1]);
     line (arrow.head[0], arrow.head[1], arrow.head[0]+arrow.len/10, arrow.head[1]+arrow.len/10);
     line (arrow.head[0], arrow.head[1], arrow.head[0]+arrow.len/10, arrow.head[1]-arrow.len/10);
+  },
+
+  update: function()
+  {
+    if (arrow.itemRef == items.length-1)
+    {
+      arrow.itemRef = 0;
+    }
+    else
+    {
+      arrow.itemRef++;
+    }
+    arrow.head = [tListStart[0] + getMaxWidth(items) + 20, tListStart[1] + arrow.itemRef*tSize + tSize/2];
+    lastArrowUpdateTime = millis();
   }
 };
 
@@ -42,12 +62,26 @@ function draw()
   fill (255);
   items.forEach(function (e, i) {text (e, tListStart[0], tListStart[1] + i*tSize)});
   arrow.draw();
+
+  // The non-blocking sleep/wait solution is this:
+  // 1) Every time the arrow is updated, record the time in lastArrowUpdateTime
+  // 2) In the main drawing loop, check if sufficient time has passed since lastArrowUpdateTime
+  // 3) Call arrow.update() if condition is fulfilled
+  //
+  // Thus incorporating the delay logic inside the main loop ensures that nothing is blocked
+  // Note that millis() is a p5 library function that returns the time the program has been running
+  if (millis() - lastArrowUpdateTime >= waitInterval)
+  {
+    arrow.update();
+  }
 }
 
 // Called every time the user presses the submit button in form
 function resetSketch()
 {
   sketchStartTime = millis();
+  lastArrowUpdateTime = sketchStartTime;
+  waitInterval = 100;
   background(0);
 
   tSize = 12;
@@ -67,7 +101,8 @@ function resetSketch()
   textSize(tSize);
 
   // Head of Arrow randomly next to one of the items
-  arrow.head = [tListStart[0] + getMaxWidth(items) + 20, tListStart[1] + utilities.random(0, items.length)*tSize + tSize/2];
+  arrow.itemRef = utilities.random(0, items.length);
+  arrow.head = [tListStart[0] + getMaxWidth(items) + 20, tListStart[1] + arrow.itemRef*tSize + tSize/2];
   arrow.len = scaleArrowSize(200);
 }
 
@@ -91,6 +126,7 @@ function scaleTextSize(ts)
   }
 }
 
+// Same recursive concept of scaleTextSize()
 // The 'fins' of the arrow have to be within the particular text line
 function scaleArrowSize(as)
 {
