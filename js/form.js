@@ -69,15 +69,13 @@ function delField(el)
 
 function findResult()
 {
-  let items = [];
-
-  let nodeList = document.getElementsByClassName('item');
-  for (let i = 0; i < nodeList.length; i++)
+  document.getElementById('sketch').style.display = 'block';
+  resetSketch();
+  if (!sketchRunning)
   {
-    items[i] = nodeList[i].value;
+    loop();
+    sketchRunning = true;
   }
 
-  let res = utilities.random(0, items.length);
-  document.getElementById('resultContainer').innerHTML = items[res];
   return false;
 }

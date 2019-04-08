@@ -7,7 +7,6 @@ h1, h2 {
 }
 
 form {
-  font-style: "Times New Roman";
   text-align: center;
 }
 
@@ -55,7 +54,7 @@ input:focus {
 }
 
 #sketch {
-  /* display: none; */
+  display: none;
   text-align: center;
   margin: 10px;
 }
