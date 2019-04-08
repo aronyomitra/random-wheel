@@ -63,7 +63,7 @@ function resetSketch()
   textSize(tSize);
 
   // Head of Arrow randomly next to one of the items
-  arrow.head = [0.75*canvas_size[0], tListStart[1] + utilities.random(0, items.length)*tSize + tSize/2];
+  arrow.head = [tListStart[0] + getMaxWidth(items) + 20, tListStart[1] + utilities.random(0, items.length)*tSize + tSize/2];
   arrow.len = scaleArrowSize(200);
 }
 
