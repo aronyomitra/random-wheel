@@ -62,6 +62,14 @@ function draw()
 
   fill (255);
   items.forEach(function (e, i) {text (e, tListStart[0], tListStart[1] + i*tSize)});
+
+  if (waitInterval > 550)
+  {
+    sketchRunning = false;
+    endMessage();
+    noLoop();
+  }
+
   arrow.draw();
 
   // The non-blocking sleep/wait solution is this:
@@ -76,11 +84,7 @@ function draw()
     arrow.update();
     waitInterval += d_waitInterval;
   }
-  if (waitInterval > 550)
-  {
-    sketchRunning = false;
-    noLoop();
-  }
+
   decelerationModel();
 }
 
@@ -183,4 +187,17 @@ function decelerationModel()
   {
     d_waitInterval = 50;
   }
+}
+
+// At the end of the animation draw a transparent black screen
+// and display the result
+function endMessage()
+{
+  fill(0, 200);
+  rect(0, 0, canvas_size[0], canvas_size[1]);
+
+  fill (255);
+  textSize(30);
+  textAlign(CENTER, CENTER);
+  text (items[arrow.itemRef], canvas_size[0]/2, canvas_size[1]/2);
 }
