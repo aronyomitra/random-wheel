@@ -9,6 +9,19 @@ let tListStart;
 
 let items = [];
 
+let arrow = {
+  head: new Array(2),
+  len: 200,
+
+  draw: function()
+  {
+    stroke (255);
+    line (arrow.head[0], arrow.head[1], arrow.head[0] + arrow.len, arrow.head[1]);
+    line (arrow.head[0], arrow.head[1], arrow.head[0]+arrow.len/10, arrow.head[1]+arrow.len/10);
+    line (arrow.head[0], arrow.head[1], arrow.head[0]+arrow.len/10, arrow.head[1]-arrow.len/10);
+  }
+};
+
 function setup()
 {
   canvas = createCanvas(canvas_size[0], canvas_size[1]);
@@ -23,7 +36,9 @@ function draw()
 {
   background(0);
 
+  fill (255);
   items.forEach(function (e, i) {text (e, tListStart[0], tListStart[1] + i*tSize)});
+  arrow.draw();
 }
 
 function resetSketch()
@@ -43,10 +58,13 @@ function resetSketch()
 
   textAlign(LEFT, TOP);
 
-  // 100 is chosen arbitrarily as default size
+  // 100 is chosen arbitrarily as maximum size
   tSize = scaleTextSize(100);
   textSize(tSize);
-  fill (255);
+
+  // Head of Arrow randomly next to one of the items
+  arrow.head = [0.75*canvas_size[0], tListStart[1] + utilities.random(0, items.length)*tSize + tSize/2];
+  arrow.len = scaleArrowSize(200);
 }
 
 // Recursive function to scale the text size both vertically and horizontally
@@ -54,7 +72,6 @@ function resetSketch()
 // If the text is shrunk due to horizontal space, there will be space left below the last item
 function scaleTextSize(ts)
 {
-  console.log(ts);
   // The textSize is dynamically computed based on the number of items ;)
   // Make the text the biggest possible but make sure everything fits inside the canvas
   textSize(ts);
@@ -67,6 +84,18 @@ function scaleTextSize(ts)
   else
   {
     return ts;
+  }
+}
+
+function scaleArrowSize(as)
+{
+  if (2*as/10 > tSize)
+  {
+    return scaleArrowSize(as-1);
+  }
+  else
+  {
+    return as;
   }
 }
 
