@@ -5,6 +5,7 @@ let canvas_size = [1000, 350];
 let sketchRunning = false;
 let sketchStartTime;
 let waitInterval;
+let d_waitInterval; // Rate of change of waitInterval
 let lastArrowUpdateTime;
 
 let tSize;
@@ -73,7 +74,14 @@ function draw()
   if (millis() - lastArrowUpdateTime >= waitInterval)
   {
     arrow.update();
+    waitInterval += d_waitInterval;
   }
+  if (waitInterval > 550)
+  {
+    sketchRunning = false;
+    noLoop();
+  }
+  decelerationModel();
 }
 
 // Called every time the user presses the submit button in form
@@ -81,7 +89,8 @@ function resetSketch()
 {
   sketchStartTime = millis();
   lastArrowUpdateTime = sketchStartTime;
-  waitInterval = 100;
+  waitInterval = 1;
+  d_waitInterval = 1;
   background(0);
 
   tSize = 12;
@@ -154,4 +163,24 @@ function getMaxWidth(arr)
     }
   }
   return max;
+}
+
+function decelerationModel()
+{
+  if (waitInterval < 50)
+  {
+    d_waitInterval = 1;
+  }
+  else if (waitInterval < 100)
+  {
+    d_waitInterval = 5
+  }
+  else if (waitInterval < 400)
+  {
+    d_waitInterval = 20;
+  }
+  else
+  {
+    d_waitInterval = 50;
+  }
 }
