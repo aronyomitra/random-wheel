@@ -91,6 +91,8 @@ function draw()
 // Called every time the user presses the submit button in form
 function resetSketch()
 {
+  document.getElementsByClassName('outro')[0].style.display = 'none';
+
   sketchStartTime = millis();
   lastArrowUpdateTime = sketchStartTime;
   waitInterval = 1;
